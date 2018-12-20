@@ -252,7 +252,7 @@ public class TransferMoney extends javax.swing.JFrame {
                 Client c=new Client();
                 try{
                     int temp=c.stub.moneyTransfer(u.acc, rec.acc, rec.balance, date1);
-                    if(temp!=-1&&temp!=-2){
+                    if(temp!=-1&&temp!=-2&&temp!=0){
                         JOptionPane.showMessageDialog(f,"Transfer successful.\n Your balance is "+temp);
                         u.balance=temp;
                         this.setVisible(false);
@@ -261,7 +261,9 @@ public class TransferMoney extends javax.swing.JFrame {
                     else
                     { if(temp==-2)
                              JOptionPane.showMessageDialog(f,"Do not have Enough Money");
-                        else
+                      else if(temp==0)
+                             JOptionPane.showMessageDialog(f,"Receiver Account not Found");
+                      else
                              JOptionPane.showMessageDialog(f,"Money Transfer Unsuccessful.Try Again Later");
                     }
                 }
