@@ -24,6 +24,8 @@ public class depositMoney extends javax.swing.JFrame {
         initComponents();
         getContentPane().setBackground(new Color(0,153,153));
         this.setVisible(true);
+        TimeDate.setDateTime(date, time);
+        TimeDate.setDateTime(datetext, "yyyy/MM/dd");
         backpage=temp;
     }
 
@@ -37,7 +39,7 @@ public class depositMoney extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel6 = new javax.swing.JPanel();
-        date = new javax.swing.JTextField();
+        datetext = new javax.swing.JTextField();
         accno = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         submit = new javax.swing.JButton();
@@ -49,6 +51,8 @@ public class depositMoney extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         logout = new javax.swing.JButton();
+        date = new javax.swing.JLabel();
+        time = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Deposit Form");
@@ -56,10 +60,10 @@ public class depositMoney extends javax.swing.JFrame {
         jPanel6.setBackground(new java.awt.Color(0, 204, 204));
         jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Deposit Form", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Times New Roman", 0, 24))); // NOI18N
 
-        date.setText("YYYY/MM/DD");
-        date.addActionListener(new java.awt.event.ActionListener() {
+        datetext.setText("YYYY/MM/DD");
+        datetext.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                dateActionPerformed(evt);
+                datetextActionPerformed(evt);
             }
         });
 
@@ -112,7 +116,7 @@ public class depositMoney extends javax.swing.JFrame {
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(amount)
                             .addComponent(accno)
-                            .addComponent(date))
+                            .addComponent(datetext))
                         .addGap(73, 73, 73))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
                         .addGap(24, 24, 24)
@@ -134,7 +138,7 @@ public class depositMoney extends javax.swing.JFrame {
                     .addComponent(jLabel11))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(date, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(datetext, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel12))
                 .addGap(56, 56, 56)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -177,6 +181,12 @@ public class depositMoney extends javax.swing.JFrame {
             }
         });
 
+        date.setForeground(new java.awt.Color(204, 0, 0));
+        date.setText("Date");
+
+        time.setForeground(new java.awt.Color(204, 0, 0));
+        time.setText("Time");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -191,6 +201,12 @@ public class depositMoney extends javax.swing.JFrame {
                             .addComponent(logout)
                             .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(time, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(date, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -198,7 +214,11 @@ public class depositMoney extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(71, 71, 71)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(date)
+                    .addComponent(time))
+                .addGap(48, 48, 48)
                 .addComponent(logout)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -212,9 +232,9 @@ public class depositMoney extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_amountActionPerformed
 
-    private void dateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dateActionPerformed
+    private void datetextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_datetextActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_dateActionPerformed
+    }//GEN-LAST:event_datetextActionPerformed
 
     private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed
         this.setVisible(false);
@@ -232,9 +252,10 @@ public class depositMoney extends javax.swing.JFrame {
         try{
             acc=Integer.parseInt(accno.getText());
             amt=Integer.parseInt(amount.getText());
-        if(!(accno.getText().equals("")||amount.getText().equals("")||date.getText().equals("")))
+        if(TimeDate.checkdate(datetext.getText())){
+        if(!(accno.getText().equals("")||amount.getText().equals("")||datetext.getText().equals("")))
         { 
-            d=date.getText();
+            d=datetext.getText();
             Client c=new Client();
             try{
                 int temp=c.stub.deposit(acc, amt, d);
@@ -252,6 +273,9 @@ public class depositMoney extends javax.swing.JFrame {
             }
         }
         else{ JOptionPane.showMessageDialog(f,"All field Requirred");}
+        }
+        else
+            JOptionPane.showMessageDialog(f,"Please Do not Modify Date");
         }catch(NumberFormatException e){
          JOptionPane.showMessageDialog(f,"Account and Amount field must be number."); 
         }
@@ -296,7 +320,8 @@ public class depositMoney extends javax.swing.JFrame {
     private javax.swing.JTextField accno;
     private javax.swing.JTextField amount;
     private javax.swing.JButton back;
-    private javax.swing.JTextField date;
+    private javax.swing.JLabel date;
+    private javax.swing.JTextField datetext;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -306,5 +331,6 @@ public class depositMoney extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel6;
     private javax.swing.JButton logout;
     private javax.swing.JButton submit;
+    private javax.swing.JLabel time;
     // End of variables declaration//GEN-END:variables
 }

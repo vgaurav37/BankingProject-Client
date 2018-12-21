@@ -22,6 +22,8 @@ public class WithdrawMoney extends javax.swing.JFrame {
         initComponents();
         getContentPane().setBackground(new Color(0,154,154));
         this.setVisible(true);
+        TimeDate.setDateTime(date, time);
+        TimeDate.setDateTime(datetext, "yyyy/MM/dd");
         backpage=temp;
     }
 
@@ -38,7 +40,7 @@ public class WithdrawMoney extends javax.swing.JFrame {
         amount = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        date = new javax.swing.JTextField();
+        datetext = new javax.swing.JTextField();
         submit = new javax.swing.JButton();
         accno = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
@@ -47,6 +49,8 @@ public class WithdrawMoney extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         logout = new javax.swing.JButton();
+        date = new javax.swing.JLabel();
+        time = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Withdraw Money");
@@ -60,7 +64,7 @@ public class WithdrawMoney extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         jLabel2.setText("Amount");
 
-        date.setText("YYYY/MM/DD");
+        datetext.setText("YYYY/MM/DD");
 
         submit.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         submit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/bankingclient/images/submit.jpg"))); // NOI18N
@@ -99,7 +103,7 @@ public class WithdrawMoney extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(accno, javax.swing.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE)
                             .addComponent(amount)
-                            .addComponent(date)))
+                            .addComponent(datetext)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(19, 19, 19)
                         .addComponent(back)
@@ -121,7 +125,7 @@ public class WithdrawMoney extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
-                    .addComponent(date, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(datetext, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(submit)
@@ -163,6 +167,12 @@ public class WithdrawMoney extends javax.swing.JFrame {
             }
         });
 
+        date.setForeground(new java.awt.Color(204, 0, 0));
+        date.setText("Date");
+
+        time.setForeground(new java.awt.Color(204, 0, 0));
+        time.setText("Time");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -173,10 +183,17 @@ public class WithdrawMoney extends javax.swing.JFrame {
                 .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(logout)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(186, 186, 186))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(logout)
+                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(186, 186, 186))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(time, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(date, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -184,7 +201,11 @@ public class WithdrawMoney extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(date)
+                    .addComponent(time))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
                 .addComponent(logout)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -210,9 +231,10 @@ public class WithdrawMoney extends javax.swing.JFrame {
         try{
             acc=Integer.parseInt(accno.getText());
             amt=Integer.parseInt(amount.getText());
-        if(!(accno.getText().equals("")||amount.getText().equals("")||date.getText().equals("")))
+        if(TimeDate.checkdate(datetext.getText())){
+        if(!(accno.getText().equals("")||amount.getText().equals("")||datetext.getText().equals("")))
         { 
-            d=date.getText();
+            d=datetext.getText();
             Client c=new Client();
             try{
                 int temp=c.stub.withdraw(acc, amt, d);
@@ -232,6 +254,8 @@ public class WithdrawMoney extends javax.swing.JFrame {
             }
         }
         else{ JOptionPane.showMessageDialog(f,"All field Requirred");}
+        }
+        else{ JOptionPane.showMessageDialog(f,"Please Donot Modify Date");}
         }catch(NumberFormatException e){
          JOptionPane.showMessageDialog(f,"Account and Amount field must be number."); 
         }
@@ -276,7 +300,8 @@ public class WithdrawMoney extends javax.swing.JFrame {
     private javax.swing.JTextField accno;
     private javax.swing.JTextField amount;
     private javax.swing.JButton back;
-    private javax.swing.JTextField date;
+    private javax.swing.JLabel date;
+    private javax.swing.JTextField datetext;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -286,5 +311,6 @@ public class WithdrawMoney extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JButton logout;
     private javax.swing.JButton submit;
+    private javax.swing.JLabel time;
     // End of variables declaration//GEN-END:variables
 }

@@ -30,6 +30,8 @@ public class TransferMoney extends javax.swing.JFrame {
         initComponents();
         getContentPane().setBackground(new Color(0,153,153));
         this.setVisible(true);
+        TimeDate.setDateTime(date, time);
+        TimeDate.setDateTime(datetext, "yyyy/MM/dd");
         backform=temp;
         this.u=u;
     }
@@ -50,7 +52,7 @@ public class TransferMoney extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         amount = new javax.swing.JTextField();
         back = new javax.swing.JButton();
-        date = new javax.swing.JTextField();
+        datetext = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         submit = new javax.swing.JButton();
@@ -61,6 +63,8 @@ public class TransferMoney extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         logout = new javax.swing.JButton();
+        date = new javax.swing.JLabel();
+        time = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Money Transfer");
@@ -89,7 +93,7 @@ public class TransferMoney extends javax.swing.JFrame {
             }
         });
 
-        date.setText("YYYY/MM/DD");
+        datetext.setText("YYYY/MM/DD");
 
         jLabel4.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         jLabel4.setText("Amount");
@@ -143,7 +147,7 @@ public class TransferMoney extends javax.swing.JFrame {
                             .addComponent(name, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(recaccno, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(amount, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(date, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(datetext, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jLabel3)
                     .addComponent(jLabel4)
                     .addComponent(jLabel5))
@@ -167,7 +171,7 @@ public class TransferMoney extends javax.swing.JFrame {
                 .addGap(32, 32, 32)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(date, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(datetext, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(31, 31, 31)
                 .addComponent(bOTP, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
@@ -215,6 +219,12 @@ public class TransferMoney extends javax.swing.JFrame {
             }
         });
 
+        date.setForeground(new java.awt.Color(204, 0, 0));
+        date.setText("Date");
+
+        time.setForeground(new java.awt.Color(204, 0, 0));
+        time.setText("Time");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -229,6 +239,12 @@ public class TransferMoney extends javax.swing.JFrame {
                             .addComponent(logout)
                             .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(time, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(date, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -236,7 +252,11 @@ public class TransferMoney extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(61, 61, 61)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(date)
+                    .addComponent(time))
+                .addGap(38, 38, 38)
                 .addComponent(logout)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -292,9 +312,10 @@ public class TransferMoney extends javax.swing.JFrame {
     }//GEN-LAST:event_backActionPerformed
 
     private void bOTPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bOTPActionPerformed
-        if(!(name.getText().equals("")||recaccno.getText().equals("")||date.getText().equals("")||amount.getText().equals(""))){
+        if(TimeDate.checkdate(datetext.getText())){
+        if(!(name.getText().equals("")||recaccno.getText().equals("")||datetext.getText().equals("")||amount.getText().equals(""))){
             rec.name=name.getText();
-            date1=date.getText();
+            date1=datetext.getText();
             try{
                 rec.acc=Integer.parseInt(recaccno.getText());
                 rec.balance=Integer.parseInt(amount.getText());
@@ -315,6 +336,9 @@ public class TransferMoney extends javax.swing.JFrame {
         {
             JOptionPane.showMessageDialog(f,"All Field Required");
         }
+        }
+        else
+            JOptionPane.showMessageDialog(f,"Please Do not Modify date ");
     }//GEN-LAST:event_bOTPActionPerformed
 
     /**
@@ -356,7 +380,8 @@ public class TransferMoney extends javax.swing.JFrame {
     private javax.swing.JTextField amount;
     private javax.swing.JButton bOTP;
     private javax.swing.JButton back;
-    private javax.swing.JTextField date;
+    private javax.swing.JLabel date;
+    private javax.swing.JTextField datetext;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -371,5 +396,6 @@ public class TransferMoney extends javax.swing.JFrame {
     private javax.swing.JTextField otp;
     private javax.swing.JTextField recaccno;
     private javax.swing.JButton submit;
+    private javax.swing.JLabel time;
     // End of variables declaration//GEN-END:variables
 }

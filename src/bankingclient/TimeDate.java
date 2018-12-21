@@ -29,5 +29,17 @@ public class TimeDate {
            }
         }).start();
     }
-    
+    public static void setDateTime(javax.swing.JTextField datetext,String format){
+        Date d=new Date();
+        SimpleDateFormat sdf=new SimpleDateFormat(format);
+        datetext.setText(sdf.format(d));
+    }
+    public static boolean checkdate(String date){
+        Date d=new Date();
+        SimpleDateFormat sdf=new SimpleDateFormat("yyyy/MM/dd");
+        if(date.equals(sdf.format(d)))
+            return true;
+        else
+            return false;
+    }
 }

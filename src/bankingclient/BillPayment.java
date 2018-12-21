@@ -31,6 +31,8 @@ public class BillPayment extends javax.swing.JFrame {
         backform=temp;
         this.u=u;
         this.setVisible(true);
+        TimeDate.setDateTime(date, time);
+        TimeDate.setDateTime(datetext, "yyyy/MM/dd");
     }
 
     /**
@@ -47,7 +49,7 @@ public class BillPayment extends javax.swing.JFrame {
         billtype = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
         payment = new javax.swing.JButton();
-        date = new javax.swing.JTextField();
+        datetext = new javax.swing.JTextField();
         back = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         amount = new javax.swing.JTextField();
@@ -60,6 +62,8 @@ public class BillPayment extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         logout = new javax.swing.JButton();
+        date = new javax.swing.JLabel();
+        time = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Bill Payment");
@@ -89,10 +93,10 @@ public class BillPayment extends javax.swing.JFrame {
             }
         });
 
-        date.setText("YYYY/MM/DD");
-        date.addActionListener(new java.awt.event.ActionListener() {
+        datetext.setText("YYYY/MM/DD");
+        datetext.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                dateActionPerformed(evt);
+                datetextActionPerformed(evt);
             }
         });
 
@@ -142,7 +146,7 @@ public class BillPayment extends javax.swing.JFrame {
                                 .addComponent(amount, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(recid, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(billtype, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(date, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(datetext, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(OTP, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(48, 48, 48))
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -173,7 +177,7 @@ public class BillPayment extends javax.swing.JFrame {
                 .addGap(23, 23, 23)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(date, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(datetext, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(bOTP)
                 .addGap(16, 16, 16)
@@ -221,6 +225,12 @@ public class BillPayment extends javax.swing.JFrame {
             }
         });
 
+        date.setForeground(new java.awt.Color(204, 0, 0));
+        date.setText("Date");
+
+        time.setForeground(new java.awt.Color(204, 0, 0));
+        time.setText("Time");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -235,6 +245,11 @@ public class BillPayment extends javax.swing.JFrame {
                             .addComponent(logout)
                             .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(time, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(date, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -242,7 +257,11 @@ public class BillPayment extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(44, 44, 44)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(date)
+                    .addComponent(time))
+                .addGap(21, 21, 21)
                 .addComponent(logout)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -258,12 +277,13 @@ public class BillPayment extends javax.swing.JFrame {
     }//GEN-LAST:event_logoutActionPerformed
 
     private void bOTPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bOTPActionPerformed
-        if(!(recid.getText().equals("")||amount.getText().equals("")||date.getText().equals(""))){
+        if(TimeDate.checkdate(datetext.getText())){
+        if(!(recid.getText().equals("")||amount.getText().equals("")||datetext.getText().equals(""))){
         try{
             try{
             amt=Integer.parseInt(amount.getText());
             }catch(Exception e){throw new ArithmeticException();}
-            Date=date.getText();
+            Date=datetext.getText();
             Client c=new Client();
             try{
                 otp=Integer.toString(c.stub.getOTP(u.acc));
@@ -277,6 +297,9 @@ public class BillPayment extends javax.swing.JFrame {
         }
         else
            JOptionPane.showMessageDialog(f,"All Field Required");
+        }
+        else
+          JOptionPane.showMessageDialog(f,"Please do not Modify Date");  
     }//GEN-LAST:event_bOTPActionPerformed
 
     private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed
@@ -284,9 +307,9 @@ public class BillPayment extends javax.swing.JFrame {
         backform.setVisible(true);
     }//GEN-LAST:event_backActionPerformed
 
-    private void dateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dateActionPerformed
+    private void datetextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_datetextActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_dateActionPerformed
+    }//GEN-LAST:event_datetextActionPerformed
 
     private void paymentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_paymentActionPerformed
         if(OTP.getText().matches(OTPpattern)){
@@ -360,7 +383,8 @@ public class BillPayment extends javax.swing.JFrame {
     private javax.swing.JButton bOTP;
     private javax.swing.JButton back;
     private javax.swing.JComboBox<String> billtype;
-    private javax.swing.JTextField date;
+    private javax.swing.JLabel date;
+    private javax.swing.JTextField datetext;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -373,5 +397,6 @@ public class BillPayment extends javax.swing.JFrame {
     private javax.swing.JButton logout;
     private javax.swing.JButton payment;
     private javax.swing.JTextField recid;
+    private javax.swing.JLabel time;
     // End of variables declaration//GEN-END:variables
 }
